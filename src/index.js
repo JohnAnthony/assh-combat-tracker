@@ -2,6 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import io from 'socket.io-client'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
+
 class App extends React.Component {
 	constructor(props) {
 		super(props)
@@ -30,23 +34,25 @@ class App extends React.Component {
 
 	render() {
 		const state = this.state;
-		return <div>
-			<h1>Round: {state.round}</h1>
-			<h1>Phase: {state.phase}</h1>
-			<h1>Order: {state.order}</h1>
+		return <MuiThemeProvider>
+			<Paper class="main">
+				<h1>Round: {state.round}</h1>
+				<h1>Phase: {state.phase}</h1>
+				<h1>Order: {state.order}</h1>
 
-			<button onClick={this.reset}>Reset</button>
-			<hr />
-			<button onClick={this.roundUp}>Round Up</button>
-			<button onClick={this.roundDown}>Round Down</button>
-			<hr />
-			<button onClick={this.phaseUp}>Phase Up</button>
-			<button onClick={this.phaseDown}>Phase Down</button>
-			<hr />
-			<button onClick={() => this.setOrder(0)}>PCs</button>
-			<button onClick={() => this.setOrder(1)}>NPCs</button>
-			<button onClick={() => this.setOrder(2)}>Tied</button>
-		</div>
+				<RaisedButton onClick={this.reset}>Reset</RaisedButton>
+				<hr />
+				<RaisedButton onClick={this.roundUp}>Round Up</RaisedButton>
+				<RaisedButton onClick={this.roundDown}>Round Down</RaisedButton>
+				<hr />
+				<RaisedButton onClick={this.phaseUp}>Phase Up</RaisedButton>
+				<RaisedButton onClick={this.phaseDown}>Phase Down</RaisedButton>
+				<hr />
+				<RaisedButton onClick={() => this.setOrder(0)}>PCs</RaisedButton>
+				<RaisedButton onClick={() => this.setOrder(1)}>NPCs</RaisedButton>
+				<RaisedButton onClick={() => this.setOrder(2)}>Tied</RaisedButton>
+			</Paper>
+		</MuiThemeProvider>
 	}
 }
 

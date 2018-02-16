@@ -1,8 +1,24 @@
-body, html {
+body, html, #root {
 	width: 100%;
 	height: 100%;
+	padding: 0;
+	margin: 0;
 }
 
 body {
-	background: url('/bg.png');
+	background: url('/bg.png') no-repeat center;
+	background-size: contain;
+}
+
+#root {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.main {
+	width: 22em;
+	padding: 1em;
 }
