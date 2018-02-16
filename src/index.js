@@ -106,8 +106,16 @@ class App extends React.Component {
 					<div className={classFromPhase(8)}>Movement</div>
 				</div>
 				<div className="split-evenly">
-					<RaisedButton onClick={this.phaseDown}>Previous</RaisedButton>
-					<RaisedButton onClick={this.phaseUp}>Next</RaisedButton>
+					<RaisedButton
+						disabled={state.phase === 0}
+						onClick={this.phaseDown}
+						label="Previous"
+					/>
+					<RaisedButton
+						disabled={state.phase === 0}
+						onClick={this.phaseUp}
+						label="Next"
+					/>
 				</div>
 			</Paper>
 		</MuiThemeProvider>
