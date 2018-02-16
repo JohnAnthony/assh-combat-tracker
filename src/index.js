@@ -6,6 +6,12 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 
+const ORDER_STRINGS = [
+	'Players > Monsters',
+	'Monsters > Players',
+	'Tied'
+];
+
 class App extends React.Component {
 	constructor(props) {
 		super(props)
@@ -34,6 +40,24 @@ class App extends React.Component {
 
 	render() {
 		const state = this.state;
+
+		let order_section;
+		if (state.phase === 0 ) {
+			order_section = <div>
+				<h3>Determine initiative</h3>
+				<div className="button-collection">
+					<RaisedButton onClick={() => this.setOrder(0)}>PCs</RaisedButton>
+					<RaisedButton onClick={() => this.setOrder(1)}>NPCs</RaisedButton>
+					<RaisedButton onClick={() => this.setOrder(2)}>Tied</RaisedButton>
+				</div>
+			</div>;
+		} else {
+			order_section = <div>
+				<h3>Initiative:</h3>
+				<h2>{ORDER_STRINGS[state.order]}</h2>
+			</div>;
+		}
+
 		return <MuiThemeProvider>
 			<Paper className="main">
 				<div className="button-collection">
@@ -45,16 +69,11 @@ class App extends React.Component {
 				<h1>Round: {state.round}</h1>
 				<div className="button-collection">
 					<RaisedButton onClick={this.roundDown}>Previous</RaisedButton>
-					<RaisedButton onClick={this.roundUp} right>Next</RaisedButton>
+					<RaisedButton onClick={this.roundUp}>Next</RaisedButton>
 				</div>
 				<hr />
 
-				<h1>Order: {state.order}</h1>
-				<div className="button-collection">
-					<RaisedButton onClick={() => this.setOrder(0)}>PCs</RaisedButton>
-					<RaisedButton onClick={() => this.setOrder(1)}>NPCs</RaisedButton>
-					<RaisedButton onClick={() => this.setOrder(2)}>Tied</RaisedButton>
-				</div>
+				{order_section}
 				<hr />
 				
 				<h1>Phase: {state.phase}</h1>
