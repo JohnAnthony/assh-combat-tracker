@@ -36,21 +36,32 @@ class App extends React.Component {
 		const state = this.state;
 		return <MuiThemeProvider>
 			<Paper className="main">
-				<h1>Round: {state.round}</h1>
-				<h1>Phase: {state.phase}</h1>
-				<h1>Order: {state.order}</h1>
+				<div className="button-collection">
+					<div></div>
+					<RaisedButton onClick={this.reset}>Reset</RaisedButton>
+				</div>
+				<hr />
 
-				<RaisedButton onClick={this.reset}>Reset</RaisedButton>
+				<h1>Round: {state.round}</h1>
+				<div className="button-collection">
+					<RaisedButton onClick={this.roundDown}>Previous</RaisedButton>
+					<RaisedButton onClick={this.roundUp} right>Next</RaisedButton>
+				</div>
 				<hr />
-				<RaisedButton onClick={this.roundUp}>Round Up</RaisedButton>
-				<RaisedButton onClick={this.roundDown}>Round Down</RaisedButton>
+
+				<h1>Order: {state.order}</h1>
+				<div className="button-collection">
+					<RaisedButton onClick={() => this.setOrder(0)}>PCs</RaisedButton>
+					<RaisedButton onClick={() => this.setOrder(1)}>NPCs</RaisedButton>
+					<RaisedButton onClick={() => this.setOrder(2)}>Tied</RaisedButton>
+				</div>
 				<hr />
-				<RaisedButton onClick={this.phaseUp}>Phase Up</RaisedButton>
-				<RaisedButton onClick={this.phaseDown}>Phase Down</RaisedButton>
-				<hr />
-				<RaisedButton onClick={() => this.setOrder(0)}>PCs</RaisedButton>
-				<RaisedButton onClick={() => this.setOrder(1)}>NPCs</RaisedButton>
-				<RaisedButton onClick={() => this.setOrder(2)}>Tied</RaisedButton>
+				
+				<h1>Phase: {state.phase}</h1>
+				<div className="button-collection">
+					<RaisedButton onClick={this.phaseDown}>Previous</RaisedButton>
+					<RaisedButton onClick={this.phaseUp}>Next</RaisedButton>
+				</div>
 			</Paper>
 		</MuiThemeProvider>
 	}
