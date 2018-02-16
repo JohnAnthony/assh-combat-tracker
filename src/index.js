@@ -17,6 +17,10 @@ class App extends React.Component {
 		this.socket.on('stateChange', state => this.setState(state))
 	}
 
+	componentWillUnmount() {
+		this.socket.disconnect()
+	}
+
 	reset = () => this.socket.emit('reset')
 	roundUp = () => this.socket.emit('roundUp')
 	roundDown = () => this.socket.emit('roundDown')
