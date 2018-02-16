@@ -22,6 +22,7 @@ class App extends React.Component {
 	roundDown = () => this.socket.emit('roundDown')
 	phaseUp = () => this.socket.emit('phaseUp')
 	phaseDown = () => this.socket.emit('phaseDown')
+	setOrder = order => this.socket.emit('setOrder', order)
 
 	render() {
 		const state = this.state;
@@ -31,10 +32,16 @@ class App extends React.Component {
 			<h1>Order: {state.order}</h1>
 
 			<button onClick={this.reset}>Reset</button>
+			<hr />
 			<button onClick={this.roundUp}>Round Up</button>
 			<button onClick={this.roundDown}>Round Down</button>
+			<hr />
 			<button onClick={this.phaseUp}>Phase Up</button>
 			<button onClick={this.phaseDown}>Phase Down</button>
+			<hr />
+			<button onClick={() => this.setOrder(0)}>PCs</button>
+			<button onClick={() => this.setOrder(1)}>NPCs</button>
+			<button onClick={() => this.setOrder(2)}>Tied</button>
 		</div>
 	}
 }

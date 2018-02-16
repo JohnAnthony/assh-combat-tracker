@@ -39,7 +39,9 @@ io.on('connection', socket => {
 	}))
 
 	socket.on('phaseUp', () => {
-		if (state.phase == 8)
+		if (state.phase === 0)
+			return;
+		else if (state.phase === 8)
 			newState({ round: state.round + 1, phase: 0, order: 0 })
 		else
 			newState({ ...state, phase: state.phase + 1 })
@@ -49,6 +51,12 @@ io.on('connection', socket => {
 		...state,
 		phase: Math.max(state.phase - 1, 0)
 	}))
+
+	socket.on('setOrder', order => {
+		if (state.phase !== 0)
+			return;
+		newState({ ...state, phase: 1, order: order })
+	})
 })
 
 server.listen(3000)
