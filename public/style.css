@@ -56,7 +56,7 @@ body {
 }
 
 .current {
-	border: 0.1em solid black;
+	border: 0.2em dashed #bbb;
 }
 
 .previous {
