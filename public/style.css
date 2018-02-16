@@ -24,8 +24,40 @@ body {
 	background-color: rgba(255, 255, 255, 0.95) !important;
 }
 
-.button-collection {
+.split-evenly {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.split-two {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.phase-display {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.phase-display h4 {
+	width: 50%;
+	text-align: center;
+}
+
+.phase-display .phase {
+	width: 50%;
+	height: 3em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+.current {
+	border: 0.1em solid black;
+}
+
+.previous {
+	color: #bbb;
 }

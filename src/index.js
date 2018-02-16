@@ -9,7 +9,7 @@ import Paper from 'material-ui/Paper';
 const ORDER_STRINGS = [
 	'Players > Monsters',
 	'Monsters > Players',
-	'Tied'
+	'Dexterity Order'
 ];
 
 class App extends React.Component {
@@ -45,7 +45,7 @@ class App extends React.Component {
 		if (state.phase === 0 ) {
 			order_section = <div>
 				<h3>Determine initiative</h3>
-				<div className="button-collection">
+				<div className="split-evenly">
 					<RaisedButton onClick={() => this.setOrder(0)}>PCs</RaisedButton>
 					<RaisedButton onClick={() => this.setOrder(1)}>NPCs</RaisedButton>
 					<RaisedButton onClick={() => this.setOrder(2)}>Tied</RaisedButton>
@@ -58,26 +58,54 @@ class App extends React.Component {
 			</div>;
 		}
 
+		const classFromPhase = phase => {
+			if (state.phase > phase)
+				return 'phase previous';
+			else if (state.phase === phase)
+				return 'phase current';
+			else
+				return 'phase future';
+		};
+
 		return <MuiThemeProvider>
 			<Paper className="main">
-				<div className="button-collection">
+
+				<div className="split-evenly">
 					<div></div>
 					<RaisedButton onClick={this.reset}>Reset</RaisedButton>
 				</div>
 				<hr />
 
+
 				<h1>Round: {state.round}</h1>
-				<div className="button-collection">
+				<div className="split-evenly">
 					<RaisedButton onClick={this.roundDown}>Previous</RaisedButton>
 					<RaisedButton onClick={this.roundUp}>Next</RaisedButton>
 				</div>
 				<hr />
 
+
 				{order_section}
 				<hr />
+
 				
-				<h1>Phase: {state.phase}</h1>
-				<div className="button-collection">
+				<div className="phase-display">
+					<h4>Phase One</h4>
+					<h4>Phase Two</h4>
+
+					<div className={classFromPhase(1)}>Melee</div>
+					<div className={classFromPhase(5)}>Melee</div>
+
+					<div className={classFromPhase(2)}>Missile</div>
+					<div className={classFromPhase(6)}>Missile</div>
+
+					<div className={classFromPhase(3)}>Sorcery</div>
+					<div className={classFromPhase(7)}>Sorcery</div>
+
+					<div className={classFromPhase(4)}>Movement</div>
+					<div className={classFromPhase(8)}>Movement</div>
+				</div>
+				<div className="split-evenly">
 					<RaisedButton onClick={this.phaseDown}>Previous</RaisedButton>
 					<RaisedButton onClick={this.phaseUp}>Next</RaisedButton>
 				</div>
