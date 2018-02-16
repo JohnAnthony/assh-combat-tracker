@@ -10,32 +10,45 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIo(server)
 
+BASE_STATE = { round: 1, phase: 0, order: 0 }
+
 app.use(express.static(__dirname + '/public'))
 app.use(webpackDevMiddleware(webpack(webpackConfig)))
 app.use(bodyParser.urlencoded({ extended: false }))
 
 io.on('connection', socket => {
-	let state = { round: 0, phase: 0, order: 0 }
+	let state = BASE_STATE
 
-	socket.on('roundUp', () => {
-		state = { round: state.round + 1, phase: 0, order: 0 }
+	const newState = (s) => {
+		state = s
 		socket.emit('stateChange', state)
-	})
+	}
 
-	socket.on('roundDown', () => {
-		state = { round: Math.max(state.round - 1, 0), phase: 0, order: 0 }
-		socket.emit('stateChange', state)
-	})
+	socket.on('reset', () => newState(BASE_STATE))
+
+	socket.on('roundUp', () => newState({
+		round: state.round + 1,
+		phase: 0,
+		order: 0
+	}))
+
+	socket.on('roundDown', () => newState({
+		round: Math.max(state.round - 1, 1),
+		phase: 0,
+		order: 0
+	}))
 
 	socket.on('phaseUp', () => {
-		state = { ...state, phase: state.phase + 1 }
-		socket.emit('stateChange', state)
+		if (state.phase == 8)
+			newState({ round: state.round + 1, phase: 0, order: 0 })
+		else
+			newState({ ...state, phase: state.phase + 1 })
 	})
 
-	socket.on('phaseDown', () => {
-		state = { ...state, phase: Math.max(state.phase - 1, 0) }
-		socket.emit('stateChange', state)
-	})
+	socket.on('phaseDown', () => newState({
+		...state,
+		phase: Math.max(state.phase - 1, 0)
+	}))
 })
 
 server.listen(3000)
