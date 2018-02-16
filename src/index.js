@@ -35,7 +35,7 @@ class App extends React.Component {
 	render() {
 		const state = this.state;
 		return <MuiThemeProvider>
-			<Paper class="main">
+			<Paper className="main">
 				<h1>Round: {state.round}</h1>
 				<h1>Phase: {state.phase}</h1>
 				<h1>Order: {state.order}</h1>
