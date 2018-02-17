@@ -7,8 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 
 const ORDER_STRINGS = [
-	'Players > Monsters',
-	'Monsters > Players',
+	'Players then Monsters',
+	'Monsters then Players',
 	'Dexterity Order'
 ];
 
