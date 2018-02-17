@@ -68,7 +68,7 @@ class App extends React.Component {
 		};
 
 		return <MuiThemeProvider>
-			<Paper className="main">
+			<Paper className="main" zDepth="5">
 
 				<div className="split-evenly">
 					<div></div>
